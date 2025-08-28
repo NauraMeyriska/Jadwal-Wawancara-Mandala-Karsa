@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Jadwal Wawancara Offline Calon Crew Mandala Karsa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white p-8 rounded-2xl shadow-md w-96">
+    <h1 class="text-2xl font-bold mb-4 text-center">Cek Jadwal Kamu</h1>
+
+    <!-- Form Input -->
+    <form id="jadwalForm" class="flex flex-col gap-4">
+      <input 
+        type="text" 
+        id="nama" 
+        placeholder="Masukkan nama..." 
+        class="border rounded-lg p-2"
+        required
+      >
+      <button 
+        type="submit" 
+        class="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+      >
+        Lihat Jadwal
+      </button>
+    </form>
+
+    <!-- Hasil -->
+    <div id="hasil" class="mt-6 hidden">
+      <h2 class="text-lg font-semibold">Jadwal untuk <span id="namaHasil"></span>:</h2>
+      <ul id="jadwalList" class="list-disc pl-5 mt-2 text-gray-700"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Contoh jadwal (bisa diganti ambil dari DB / API)
+    const dataJadwal = {
+	"Muhammad Faisal Akbar ": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 09.00 WIB"],
+	"Dita Avia": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 09.20 WIB"],
+	"Nurul Akbari": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 09.40 WIB"],
+	"Nailah Shaumah": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 10.00 WIB"],
+	"Satya Fanny Nur Sabila": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 10.20 WIB"],
+	"Reni Tri Lestari": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 10.40 WIB"],
+	"Emilia Putri": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 11.00 WIB"],
+	"Fitria Suci Fachlevi": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 11.20 WIB"],
+	"Ika Wahyuni Putri": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 11.40 WIB"],
+	"Ririn Shara Nova": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 13.00 WIB"],
+	"Novalin Azzahra": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 13.20 WIB"],
+	"Gina Naswatun Nizar": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 13.40 WIB"],
+	"Rendi Febriyanto": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 14.00 WIB"],
+	"Azzahra Nurul Haliza": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 14.20 WIB"],
+	"Sintia Sekar Arum": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 14.40 WIB"],
+	"Dea Oktavia": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 15.00 WIB"],
+	"Eva Afrilianti": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 16.00 WIB"],
+	"Ratnasari": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 16.20 WIB"],
+	"Gunawan": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 16.40 WIB"],
+	"Shalbiah Nurfajriyati": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 17.00 WIB"],
+	"Chayla Adinda Purnomo Putri": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 17.20 WIB"],
+      "Diaz Yuliandika": ["Jumat, 29 Agustus 2025 - Wawancara Pukul 17.40 WIB"]
+    };
+
+    document.getElementById("jadwalForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const nama = document.getElementById("nama").value.trim();
+      const hasilDiv = document.getElementById("hasil");
+      const namaHasil = document.getElementById("namaHasil");
+      const jadwalList = document.getElementById("jadwalList");
+
+      // Reset
+      jadwalList.innerHTML = "";
+
+      if (dataJadwal[nama]) {
+        namaHasil.textContent = nama;
+        dataJadwal[nama].forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          jadwalList.appendChild(li);
+        });
+        hasilDiv.classList.remove("hidden");
+      } else {
+        namaHasil.textContent = nama;
+        const li = document.createElement("li");
+        li.textContent = "Belum ada jadwal.";
+        jadwalList.appendChild(li);
+        hasilDiv.classList.remove("hidden");
+      }
+    });
+  </script>
+
+</body>
+</html>
